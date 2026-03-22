@@ -9,3 +9,4 @@ Thumbs.db
 # images/*.png
 # images/*.jpg
 # images/*.gif
+.vercel
