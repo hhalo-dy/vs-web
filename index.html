@@ -1134,21 +1134,17 @@
 
     const getMaxScroll = () => Math.max(0, container.scrollWidth - window.innerWidth + 96);
     
+    // ----- 桌面端：滚轮横向滚动 -----
     let wheelDelta = 0;
-    
     document.addEventListener('wheel', (e) => {
       const rect = portfolioSection.getBoundingClientRect();
       const isPortfolioFullyInView = rect.top <= window.innerHeight * 0.3;
-      
       if (!isPortfolioFullyInView) return;
-      
       wheelDelta += e.deltaY;
-      
       if (Math.abs(wheelDelta) > 10) {
         const maxScroll = getMaxScroll();
         const newScrollX = scrollX + Math.sign(wheelDelta) * 100;
         const clampedScrollX = Math.max(0, Math.min(newScrollX, maxScroll));
-        
         if (clampedScrollX !== scrollX) {
           e.preventDefault();
           scrollX = clampedScrollX;
@@ -1159,6 +1155,60 @@
           wheelDelta = 0;
         }
       }
+    }, { passive: false });
+
+    // ----- 手机端：触摸滑动横向滚动 -----
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartScrollX = 0;
+    let isTouchScrollingX = null; // null=未决定, true=横向, false=竖向
+    const SWIPE_THRESHOLD = 10; // px，超过才算滑动方向
+
+    container.addEventListener('touchstart', (e) => {
+      const rect = portfolioSection.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // 只有在 portfolio 区域可见时才拦截
+      const inPortfolio = rect.top < vh && rect.bottom > 0;
+      if (!inPortfolio) return;
+
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchStartScrollX = scrollX;
+      isTouchScrollingX = null;
+    }, { passive: false });
+
+    container.addEventListener('touchmove', (e) => {
+      if (isTouchScrollingX === false) return; // 已确认为竖滑，不阻止
+      if (touchStartX === 0) return;
+
+      const dx = touchStartX - e.touches[0].clientX;
+      const dy = touchStartY - e.touches[0].clientY;
+
+      // 首次判断滑动方向
+      if (isTouchScrollingX === null) {
+        if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+          isTouchScrollingX = true;
+        } else if (Math.abs(dy) > SWIPE_THRESHOLD && Math.abs(dy) > Math.abs(dx)) {
+          isTouchScrollingX = false;
+          return; // 竖滑，让浏览器自然滚动
+        } else {
+          return; // 还未超过阈值
+        }
+      }
+
+      if (isTouchScrollingX) {
+        e.preventDefault();
+        const maxScroll = getMaxScroll();
+        scrollX = Math.max(0, Math.min(touchStartScrollX + dx, maxScroll));
+        window.portfolioStrip.x = scrollX;
+        container.style.transform = `translateX(-${scrollX}px)`;
+      }
+    }, { passive: false });
+
+    container.addEventListener('touchend', () => {
+      touchStartX = 0;
+      touchStartY = 0;
+      isTouchScrollingX = null;
     }, { passive: false });
   });
 
