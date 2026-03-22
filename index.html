@@ -362,22 +362,22 @@
 </div>
 </div>
 </div>
-<!-- Header / Navigation：手机短文案更紧凑；桌面完整文案 + w-max 居中 -->
+<!-- Header / Navigation：单行不换行；手机端导航区可横滑；整栏桌面 w-max 居中 -->
 <header class="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] sm:w-max sm:max-w-none max-w-[calc(100vw-1.5rem)]">
-  <div class="rounded-full border border-[var(--outline-variant)] bg-[var(--surface-container-lowest)]/80 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.06)] flex flex-nowrap items-center gap-1.5 sm:gap-6 md:gap-8 pl-2.5 pr-2 sm:px-6 py-1.5 sm:py-3">
-    <nav class="flex flex-nowrap items-center gap-1.5 sm:gap-4 md:gap-6 min-w-0 flex-1 sm:flex-none overflow-x-auto scrollbar-none sm:overflow-visible touch-pan-x">
-      <a class="text-xs sm:text-sm font-bold text-[var(--on-surface)] border-b-2 border-[var(--primary-fixed)] pb-0.5 whitespace-nowrap shrink-0" href="#" title="首页">首页</a>
-      <a class="text-xs sm:text-sm font-medium text-[var(--on-surface-variant)] hover:text-[var(--on-surface)] transition-colors whitespace-nowrap shrink-0" href="#about" title="关于我"><span class="sm:hidden">关于</span><span class="hidden sm:inline">关于我</span></a>
-      <a class="text-xs sm:text-sm font-medium text-[var(--on-surface-variant)] hover:text-[var(--on-surface)] transition-colors whitespace-nowrap shrink-0" href="#my-portfolio" title="个人作品"><span class="sm:hidden">作品</span><span class="hidden sm:inline">个人作品</span></a>
-      <a class="text-xs sm:text-sm font-medium text-[var(--on-surface-variant)] hover:text-[var(--on-surface)] transition-colors whitespace-nowrap shrink-0" href="#skills" title="个人荣誉/技能"><span class="sm:hidden">荣誉</span><span class="hidden sm:inline">个人荣誉/技能</span></a>
+  <div class="rounded-full border border-[var(--outline-variant)] bg-[var(--surface-container-lowest)]/80 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.06)] flex flex-nowrap items-center gap-2 sm:gap-4 md:gap-5 px-3 sm:px-6 py-2 sm:py-3">
+    <nav class="flex flex-nowrap items-center gap-2 sm:gap-4 md:gap-6 min-w-0 flex-1 sm:flex-none overflow-x-auto scrollbar-none sm:overflow-visible touch-pan-x">
+      <a class="text-[11px] sm:text-sm font-bold text-[var(--on-surface)] border-b-2 border-[var(--primary-fixed)] pb-0.5 whitespace-nowrap shrink-0" href="#">首页</a>
+      <a class="text-[11px] sm:text-sm font-medium text-[var(--on-surface-variant)] hover:text-[var(--on-surface)] transition-colors whitespace-nowrap shrink-0" href="#about">关于我</a>
+      <a class="text-[11px] sm:text-sm font-medium text-[var(--on-surface-variant)] hover:text-[var(--on-surface)] transition-colors whitespace-nowrap shrink-0" href="#my-portfolio">个人作品</a>
+      <a class="text-[11px] sm:text-sm font-medium text-[var(--on-surface-variant)] hover:text-[var(--on-surface)] transition-colors whitespace-nowrap shrink-0" href="#skills">个人荣誉/技能</a>
     </nav>
     <div class="hidden sm:block w-px h-5 shrink-0 bg-[var(--outline-variant)]" aria-hidden="true"></div>
-    <div class="flex flex-nowrap items-center gap-0.5 sm:gap-3 shrink-0">
-      <button type="button" id="dark-toggle" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center hover:bg-[var(--surface-container-high)] transition-all active:scale-90" aria-label="切换明暗模式">
-        <span class="material-symbols-outlined text-[17px] sm:text-[20px] text-[var(--on-surface-variant)]" id="dark-icon">dark_mode</span>
+    <div class="flex flex-nowrap items-center gap-1 sm:gap-3 shrink-0">
+      <button type="button" id="dark-toggle" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-[var(--surface-container-high)] transition-all active:scale-90" aria-label="切换明暗模式">
+        <span class="material-symbols-outlined text-[18px] sm:text-[20px] text-[var(--on-surface-variant)]" id="dark-icon">dark_mode</span>
       </button>
       <div class="relative group/resume-btn">
-        <button type="button" class="bg-[var(--primary-container)] text-[var(--on-primary-container)] px-2.5 sm:px-5 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold hover:scale-105 active:scale-95 transition-all whitespace-nowrap" onclick="toggleResumeMenu(event)" title="获取简历"><span class="sm:hidden">简历</span><span class="hidden sm:inline">获取简历</span></button>
+        <button type="button" class="bg-[var(--primary-container)] text-[var(--on-primary-container)] px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-sm font-bold hover:scale-105 active:scale-95 transition-all whitespace-nowrap" onclick="toggleResumeMenu(event)">获取简历</button>
         <div class="absolute right-0 mt-3 w-64 bg-[var(--surface-container-lowest)]/90 backdrop-blur-xl border border-[var(--outline-variant)] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.12)] overflow-hidden z-[60] animate-in fade-in slide-in-from-top-2 duration-200 hidden" id="resume-dropdown">
           <div class="p-2" id="resume-menu-content">
             <button type="button" class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-[var(--surface-container-high)] transition-colors text-left group/item">
@@ -399,12 +399,12 @@
   </div>
 </header>
 <!-- Main Hero Section (Integrated 1st Fold) -->
-<main class="relative min-h-screen flex flex-col justify-between overflow-hidden">
+<main class="relative flex flex-col justify-start overflow-hidden">
 <!-- Background Blobs -->
 <div class="hero-blob top-[-10%] left-[-5%]"></div>
 <div class="hero-blob top-[20%] right-[-5%]"></div>
 <!-- Hero Content Layer -->
-<div class="max-w-7xl mx-auto w-full px-6 pt-32 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center flex-grow">
+<div class="max-w-7xl mx-auto w-full px-6 pt-24 sm:pt-28 pb-8 sm:pb-12 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start lg:items-center">
 <!-- Left Column: Content -->
 <div class="order-2 lg:order-1 space-y-8">
 <div class="space-y-4">
@@ -437,7 +437,7 @@
 </div>
 </div>
 <!-- Integrated Sliding Gallery Section -->
-<section class="w-full pb-20 pt-10 mt-[100px]" id="portfolio">
+<section class="w-full pb-20 pt-6 sm:pt-8 mt-4 sm:mt-8" id="portfolio">
 <div class="relative overflow-hidden group">
 <!-- Soft Fade Gradients -->
 <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none"></div>
