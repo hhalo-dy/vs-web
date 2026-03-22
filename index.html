@@ -1029,37 +1029,43 @@
         p.innerHTML = html;
     });
     
-    // 创建timeline来控制整个动画
-    // 动态计算滚动距离：桌面端 3000px，移动端按视口高度的 4 倍（适合竖屏）
-    const isMobile = window.innerWidth < 768;
-    const scrollDistance = isMobile
-        ? window.innerHeight * 4
-        : 3000;
-
-    const tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: aboutSection,
-            start: 'top top',
-            end: `bottom+=${scrollDistance}px bottom`,
-            scrub: 1,
-            pin: true,
-            pinSpacing: true,
-            // 移动端 anticipatePin 改善手感
-            anticipatePin: 1
-        }
-    });
-
     // 获取所有字符
     const allChars = document.querySelectorAll('#about-content .char');
 
-    // 为每个字符添加动画
-    allChars.forEach((char, index) => {
-        tl.fromTo(char,
-            { color: '#999999' },
-            { color: '#1b1c1c' },
-            index * 0.15
-        );
+    // 非 pin 方案：直接监听滚动 progress，实时更新字符颜色
+    // 优点：页面永远不会被钉住，触摸滑动全程正常
+    ScrollTrigger.create({
+        trigger: aboutSection,
+        start: 'top bottom',
+        end: 'bottom top',
+        onUpdate: (self) => {
+            const progress = self.progress; // 0 -> 1
+            const totalChars = allChars.length;
+            allChars.forEach((char, index) => {
+                const charProgress = progress * totalChars - index;
+                if (charProgress >= 1) {
+                    char.style.color = '#1b1c1c';
+                } else if (charProgress > 0) {
+                    // 渐变过渡
+                    char.style.color = lerpColor('#999999', '#1b1c1c', charProgress);
+                } else {
+                    char.style.color = '#999999';
+                }
+            });
+        }
     });
+
+    // 颜色插值辅助函数
+    function lerpColor(a, b, t) {
+        const ah = parseInt(a.replace('#', ''), 16);
+        const bh = parseInt(b.replace('#', ''), 16);
+        const ar = ah >> 16, ag = (ah >> 8) & 0xff, ab = ah & 0xff;
+        const br = bh >> 16, bg = (bh >> 8) & 0xff, bb = bh & 0xff;
+        const rr = Math.round(ar + (br - ar) * t);
+        const rg = Math.round(ag + (bg - ag) * t);
+        const rb = Math.round(ab + (bb - ab) * t);
+        return `rgb(${rr},${rg},${rb})`;
+    }
 
   function startVideo(element) {
     element.classList.add('playing');
