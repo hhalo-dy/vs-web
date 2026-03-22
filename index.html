@@ -118,6 +118,10 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        /* 顶栏单行横向滚动（iOS 顺滑） */
+        .site-header-bar {
+            -webkit-overflow-scrolling: touch;
+        }
         /* Video Thumbnail Overlay Styles */
         .project-card {
             position: relative;
@@ -257,17 +261,17 @@
 </div>
 </div>
 </div>
-<!-- Header / Navigation（移动端直接展示全部链接，可换行；无汉堡、无深色模式按钮） -->
-<header class="fixed top-3 left-3 right-3 md:top-6 md:left-1/2 md:-translate-x-1/2 md:right-auto md:w-max max-w-[calc(100vw-1.5rem)] rounded-[1.75rem] border border-white/20 bg-white/70 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.04)] flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-2 sm:gap-x-4 sm:gap-y-2 px-3 py-2.5 md:px-6 md:py-3 z-50">
-<nav class="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 sm:gap-x-4 md:gap-6" id="site-nav">
-<a class="text-zinc-900 font-bold border-b-2 border-yellow-400 pb-0.5 text-xs sm:text-sm whitespace-nowrap" href="#" style="">首页</a>
-<a class="text-zinc-500 hover:text-zinc-900 transition-colors text-xs sm:text-sm whitespace-nowrap" href="#about" style="">关于我</a>
-<a class="text-zinc-500 hover:text-zinc-900 transition-colors text-xs sm:text-sm whitespace-nowrap" href="#my-portfolio" style="">个人作品</a>
-<a class="text-zinc-500 hover:text-zinc-900 transition-colors text-xs sm:text-sm whitespace-nowrap" href="#skills" style="">个人荣誉/技能</a>
+<!-- Header / Navigation：全宽单行横排；极窄屏可横向轻滑；无汉堡、无深色模式 -->
+<header class="site-header-bar fixed top-3 left-3 right-3 md:top-6 md:left-1/2 md:-translate-x-1/2 md:right-auto md:w-max max-w-[calc(100vw-1.5rem)] rounded-[1.75rem] border border-white/20 bg-white/70 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.04)] flex flex-row flex-nowrap items-center justify-center gap-1.5 sm:gap-2 md:gap-5 px-2 sm:px-4 md:px-6 py-2 md:py-3 z-50 overflow-x-auto overscroll-x-contain no-scrollbar">
+<nav class="flex flex-row flex-nowrap items-center gap-1.5 sm:gap-2 md:gap-6 shrink-0" id="site-nav">
+<a class="text-zinc-900 font-bold border-b-2 border-yellow-400 pb-0.5 text-[11px] sm:text-xs md:text-sm whitespace-nowrap" href="#" style="">首页</a>
+<a class="text-zinc-500 hover:text-zinc-900 transition-colors text-[11px] sm:text-xs md:text-sm whitespace-nowrap" href="#about" style="">关于我</a>
+<a class="text-zinc-500 hover:text-zinc-900 transition-colors text-[11px] sm:text-xs md:text-sm whitespace-nowrap" href="#my-portfolio" style="">个人作品</a>
+<a class="text-zinc-500 hover:text-zinc-900 transition-colors text-[11px] sm:text-xs md:text-sm whitespace-nowrap" href="#skills" style="">个人荣誉/技能</a>
 </nav>
 <div class="flex items-center shrink-0">
 <div class="relative group/resume-btn">
-<button class="bg-primary-container text-on-primary-container px-4 py-2 sm:px-5 rounded-full text-xs sm:text-sm font-bold hover:scale-105 active:scale-95 transition-all flex items-center gap-2" onclick="toggleResumeMenu(event)" style="">
+<button class="bg-primary-container text-on-primary-container px-2.5 py-1.5 sm:px-4 sm:py-2 md:px-5 rounded-full text-[11px] sm:text-xs md:text-sm font-bold hover:scale-105 active:scale-95 transition-all flex items-center gap-2 whitespace-nowrap" onclick="toggleResumeMenu(event)" style="">
     获取简历
   </button>
 <!-- Resume Dropdown Menu -->
