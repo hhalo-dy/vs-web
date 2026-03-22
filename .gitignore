@@ -1,0 +1,11 @@
+# Dependencies
+# node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Large media files (uncomment if you want to track them)
+# images/*.png
+# images/*.jpg
+# images/*.gif
