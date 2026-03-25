@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh"><head></head><body class="bg-surface text-on-surface antialiased overflow-x-hidden" style="overflow: auto;">
+<!DOCTYPE html><html lang="zh"><head></head><body class="bg-surface text-on-surface antialiased overflow-x-hidden" style="overflow-x: hidden;">
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -119,6 +119,9 @@
           --on-error: #ffffff;
           --on-error-container: #93000a;
           --surface-tint: #705d00;
+          /* 关于我：逐字揭示起止色（浅色模式） */
+          --about-text-reveal-from: #999999;
+          --about-text-reveal-to: #1b1c1c;
         }
         .dark {
           --background: #1b1c1c;
@@ -168,6 +171,9 @@
           --on-error: #690005;
           --on-error-container: #ffdad6;
           --surface-tint: #e9c400;
+          /* 关于我：逐字揭示起止色（夜间模式，避免「黑字压暗底」） */
+          --about-text-reveal-from: rgba(242, 240, 240, 0.42);
+          --about-text-reveal-to: #f2f0f0;
         }
         body {
           font-family: 'Inter', 'Noto Sans SC', sans-serif;
@@ -362,36 +368,30 @@
 </div>
 </div>
 </div>
-<!-- Header / Navigation：单行不换行；手机端导航区可横滑；整栏桌面 w-max 居中 -->
-<header class="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] sm:w-max sm:max-w-none max-w-[calc(100vw-1.5rem)]">
-  <div class="rounded-full border border-[var(--outline-variant)] bg-[var(--surface-container-lowest)]/80 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.06)] flex flex-nowrap items-center gap-2 sm:gap-4 md:gap-5 px-3 sm:px-6 py-2 sm:py-3">
-    <nav class="flex flex-nowrap items-center gap-2 sm:gap-4 md:gap-6 min-w-0 flex-1 sm:flex-none overflow-x-auto scrollbar-none sm:overflow-visible touch-pan-x">
+<!-- Header / Navigation：手机端链接与按钮挨在一起、胶囊随内容收窄居中；桌面 w-max -->
+<header class="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-max max-w-[calc(100vw-1.5rem)] sm:w-max sm:max-w-none">
+  <div class="rounded-full border border-[var(--outline-variant)] bg-[var(--surface-container-lowest)]/80 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.06)] flex flex-nowrap items-center justify-start gap-2 sm:gap-4 md:gap-5 px-3 sm:px-6 py-2 sm:py-3 w-max max-w-full">
+    <nav class="flex flex-nowrap items-center gap-2.5 sm:gap-4 md:gap-6 min-w-0 max-w-[calc(100vw-9.5rem)] sm:max-w-none sm:flex-none overflow-x-auto scrollbar-none sm:overflow-visible touch-pan-x">
       <a class="text-[11px] sm:text-sm font-bold text-[var(--on-surface)] border-b-2 border-[var(--primary-fixed)] pb-0.5 whitespace-nowrap shrink-0" href="#">首页</a>
       <a class="text-[11px] sm:text-sm font-medium text-[var(--on-surface-variant)] hover:text-[var(--on-surface)] transition-colors whitespace-nowrap shrink-0" href="#about">关于我</a>
       <a class="text-[11px] sm:text-sm font-medium text-[var(--on-surface-variant)] hover:text-[var(--on-surface)] transition-colors whitespace-nowrap shrink-0" href="#my-portfolio">个人作品</a>
       <a class="text-[11px] sm:text-sm font-medium text-[var(--on-surface-variant)] hover:text-[var(--on-surface)] transition-colors whitespace-nowrap shrink-0" href="#skills">个人荣誉/技能</a>
     </nav>
     <div class="hidden sm:block w-px h-5 shrink-0 bg-[var(--outline-variant)]" aria-hidden="true"></div>
-    <div class="flex flex-nowrap items-center gap-1 sm:gap-3 shrink-0">
-      <button type="button" id="dark-toggle" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-[var(--surface-container-high)] transition-all active:scale-90" aria-label="切换明暗模式">
-        <span class="material-symbols-outlined text-[18px] sm:text-[20px] text-[var(--on-surface-variant)]" id="dark-icon">dark_mode</span>
+    <div class="flex flex-nowrap items-center gap-1.5 sm:gap-3 shrink-0">
+      <button type="button" id="dark-toggle" class="w-10 h-10 sm:w-8 sm:h-8 rounded-full flex items-center justify-center bg-[var(--surface-container-high)]/60 sm:bg-transparent hover:bg-[var(--surface-container-high)] transition-all active:scale-90" aria-label="切换明暗模式">
+        <span class="material-symbols-outlined text-[22px] sm:text-[20px] text-[var(--on-surface-variant)] leading-none" id="dark-icon">dark_mode</span>
       </button>
       <div class="relative group/resume-btn">
-        <button type="button" class="bg-[var(--primary-container)] text-[var(--on-primary-container)] px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-sm font-bold hover:scale-105 active:scale-95 transition-all whitespace-nowrap" onclick="toggleResumeMenu(event)">获取简历</button>
+        <a download="戴雅_简历.pdf" href="./戴雅简历.pdf" class="bg-[var(--primary-container)] text-[var(--on-primary-container)] px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-sm font-bold hover:scale-105 active:scale-95 transition-all whitespace-nowrap cursor-pointer">获取简历</a>
         <div class="absolute right-0 mt-3 w-64 bg-[var(--surface-container-lowest)]/90 backdrop-blur-xl border border-[var(--outline-variant)] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.12)] overflow-hidden z-[60] animate-in fade-in slide-in-from-top-2 duration-200 hidden" id="resume-dropdown">
           <div class="p-2" id="resume-menu-content">
-            <button type="button" class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-[var(--surface-container-high)] transition-colors text-left group/item">
+            <a download="戴雅_简历.pdf" href="./戴雅简历.pdf" class="flex items-center gap-4 p-4 rounded-xl hover:bg-[var(--surface-container-high)] transition-colors group/item">
               <div class="w-10 h-10 rounded-full bg-[var(--surface-container-high)] flex items-center justify-center text-[var(--on-surface-variant)] group-hover/item:bg-[var(--primary-container)] group-hover/item:text-[var(--on-primary-container)] transition-colors">
                 <span class="material-symbols-outlined text-xl">download</span>
               </div>
               <span class="font-bold text-[var(--on-surface)]">下载简历</span>
-            </button>
-            <button type="button" onclick="showEmailInput(event)" class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-[var(--surface-container-high)] transition-colors text-left group/item">
-              <div class="w-10 h-10 rounded-full bg-[var(--surface-container-high)] flex items-center justify-center text-[var(--on-surface-variant)] group-hover/item:bg-[var(--primary-container)] group-hover/item:text-[var(--on-primary-container)] transition-colors">
-                <span class="material-symbols-outlined text-xl">send</span>
-              </div>
-              <span class="font-bold text-[var(--on-surface)]">发送简历至邮箱</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -414,7 +414,7 @@
                     <span class="absolute bottom-2 left-0 w-full h-4 bg-primary-container/40 -z-10 rounded-full"></span>
 </span>
 </h1>
-<h2 class="flex flex-row flex-nowrap items-baseline gap-3 sm:gap-4 md:gap-6 text-base sm:text-lg md:text-2xl lg:text-3xl font-bold font-headline text-zinc-900 leading-tight tracking-tight">
+<h2 class="flex flex-row flex-nowrap items-baseline gap-3 sm:gap-4 md:gap-6 text-base sm:text-lg md:text-2xl lg:text-3xl font-bold font-headline text-[var(--on-surface)] leading-tight tracking-tight">
                 <span class="whitespace-nowrap">用真实的镜头讲故事，</span>
                 <span class="whitespace-nowrap">用 AI 提高生产力。</span>
             </h2>
@@ -431,7 +431,7 @@
 <!-- Right Column: Visual Avatar -->
 <div class="order-1 lg:order-2 flex justify-center lg:justify-end relative">
 <div class="relative w-full max-w-md flex items-end justify-center transition-transform duration-700 h-full">
-<img alt="Daya Avatar" class="w-auto h-full max-h-[80vh] object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ugmP9yAnQxnPAcwz5Ii8IBIoM6kG5fLFmvTMmtK8UdRi5JFfqGeZpDo9uKzp6MVGesnx9Yeyes6ofWfwhwNRXk8ye1LFJRBF89dYbgWNjZSLua3uAvc2EmhI5EQTKmbtTMDEt8WMag8gca62MwCUovg95SCKmG00BxjfMRQ9x2ERG03caPivEfjSVqolRylJEOS6SCydxGXYd1vRYwEBwIM9M-9QdNAEd6-ROlj8YTaPQnujSF4Wrm0vgZAO_U1jhsbx-WsgMpp" style="">
+<img alt="Daya Avatar" class="w-auto h-full max-h-[80vh] object-contain" src="./1_transparent.gif" decoding="async">
 </div>
 <div class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary-container/10 to-transparent rounded-full blur-3xl opacity-50"></div>
 </div>
@@ -581,35 +581,36 @@
 </div>
 </section>
 <!-- About Me Section -->
-<section class="max-w-7xl mx-auto px-6 py-32" id="about">
+<section class="relative z-10 max-w-7xl mx-auto px-6 py-32" id="about">
 <div class="max-w-4xl">
 <h2 class="text-7xl font-black font-headline mb-12 tracking-tight" style="">关于我</h2>
 <h3 class="text-3xl font-bold font-headline mb-8 text-primary" style="">Hi, I'm 戴雅.</h3>
 <div class="space-y-6" id="about-content">
-<p class="text-2xl md:text-3xl font-body leading-relaxed" style="color: #999999;">
+<p class="text-2xl md:text-3xl font-body leading-relaxed" style="color: var(--about-text-reveal-from);">
         我是戴雅。一名专注影视工业化制作的视觉创作者，拥有 3 年一线实战经验。
       </p>
-<p class="text-2xl md:text-3xl font-body leading-relaxed" style="color: #999999;">
+<p class="text-2xl md:text-3xl font-body leading-relaxed" style="color: var(--about-text-reveal-from);">
         我习惯使用Sony相机配合达芬奇（DaVinci Resolve）完成视觉创作。过去三年，我深度参与了多个商业项目的全链路制作，从 4K 多机位现场直播到后期的精细化调色，我始终坚持用高标准的工业逻辑去交付视觉作品。
       </p>
-<p class="text-2xl md:text-3xl font-body leading-relaxed" style="color: #999999;">
+<p class="text-2xl md:text-3xl font-body leading-relaxed" style="color: var(--about-text-reveal-from);">
         我正在将 AI 引入我的核心工作流。对我而言，AI 不是简单的滤镜工具，而是一个能帮我跳过重复劳动、让我能腾出更多精力去打磨"叙事效果"的视觉杠杆，这个网站就是AI的实践成果。
       </p>
-<p class="text-2xl md:text-3xl font-body leading-relaxed" style="color: #999999;">
+<p class="text-2xl md:text-3xl font-body leading-relaxed" style="color: var(--about-text-reveal-from);">
         我没有浮夸的履历，只有在每一个项目中踏实交付的实战经验。
       </p>
 </div>
 </div>
 </section>
-<!-- My Portfolio Section -->
-<section class="w-full min-h-screen relative overflow-hidden flex flex-col items-center pt-24" id="my-portfolio">
-<div class="max-w-7xl mx-auto w-full px-6">
-<h2 class="text-6xl font-black font-headline mb-16 tracking-tight" style="">个人作品</h2>
-</div>
-<div class="w-full flex-1 relative overflow-hidden">
-<div id="portfolio-container" class="flex gap-8 px-6 pb-8 transition-transform duration-500" style="width: fit-content;">
+<!-- My Portfolio Section：桌面端整块垂直居中；pin 目标为标题+卡片 wrapper -->
+<section class="relative z-0 w-full min-h-screen overflow-hidden flex flex-col items-center md:min-h-[100vh] md:justify-center md:py-12 pt-12 md:pt-24" id="my-portfolio">
+    <div class="w-full flex flex-col items-center gap-8 md:gap-10" id="portfolio-pin-wrapper">
+    <div class="max-w-7xl mx-auto w-full px-4 sm:px-6">
+      <h2 class="text-4xl sm:text-5xl md:text-6xl font-black font-headline mb-0 md:mb-2 tracking-tight" style="">个人作品</h2>
+    </div>
+    <div class="portfolio-scroll-area w-full relative overflow-hidden" id="portfolio-scroll-area">
+      <div id="portfolio-container" class="portfolio-container flex flex-nowrap gap-6 sm:gap-8 px-4 sm:px-6 pb-8" style="width: max-content;">
 <!-- Project 1 -->
-<div class="portfolio-card min-w-[400px] w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="1" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="1" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630824&amp;mid=DaLZwPzeR3EQnrjY" onclick="startVideo(this)">
 <img src="./images/3.png" alt="视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -636,7 +637,7 @@
 </div>
 </div>
 <!-- Project 2 -->
-<div class="portfolio-card min-w-[400px] w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="2" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="2" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630835&amp;mid=KdRx7b0Gj0R4b2N3" onclick="startVideo(this)">
 <img src="./images/12.png" alt="百万级教育 IP：全链路视觉制作 视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -663,7 +664,7 @@
 </div>
 </div>
 <!-- Project 3 -->
-<div class="portfolio-card min-w-[400px] w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="3" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="3" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630822&amp;mid=XzVJwDqAXVn4D0EZ" onclick="startVideo(this)">
 <img src="./images/1.png" alt="视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -690,7 +691,7 @@
 </div>
 </div>
 <!-- Project 4 -->
-<div class="portfolio-card min-w-[400px] w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="4" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="4" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630818&amp;mid=Xl5M7nrz16B7kKEg" onclick="startVideo(this)">
 <img src="./images/7.png" alt="视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -717,7 +718,7 @@
 </div>
 </div>
 <!-- Project 5 -->
-<div class="portfolio-card min-w-[400px] w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="5" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="5" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630814&mid=bKG8Qd3oXnL4RJMy" onclick="startVideo(this)">
 <img src="./images/8.jpg" alt="漫威片场打工日记" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -743,7 +744,7 @@
 </div>
 </div>
 <!-- Project 6 -->
-<div class="portfolio-card min-w-[400px] w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="6" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="6" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630905&amp;mid=DA96QeyElmxQj5N0" onclick="startVideo(this)">
 <img src="./images/6.png" alt="视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -770,7 +771,7 @@
 </div>
 </div>
 <!-- Project 7 -->
-<div class="portfolio-card min-w-[400px] w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="7" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="7" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-gradient-to-br from-indigo-500 to-purple-600 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630826&amp;mid=0vMbw1z68qX4eJ1p" onclick="startVideo(this)">
 <img src="./images/4.png" alt="视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -797,7 +798,7 @@
 </div>
 </div>
 <!-- Project 8 -->
-<div class="portfolio-card min-w-[400px] w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="8" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="8" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630821&amp;mid=9WxJ7lLAWjm781kM" onclick="startVideo(this)">
 <img src="./images/5.png" alt="视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -824,7 +825,7 @@
 </div>
 </div>
 <!-- Project 9 -->
-<div class="portfolio-card min-w-[400px] w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="9" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="9" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630816&amp;mid=ro1V7E2qRrLwdXAM" onclick="startVideo(this)">
 <img src="./images/9.jpg" alt="《我的第一座雪山》视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -850,7 +851,7 @@
 </div>
 </div>
 <!-- Project 10 -->
-<div class="portfolio-card min-w-[400px] w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="10" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="10" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630812&amp;mid=jlyzw0vWOZzQB198" onclick="startVideo(this)">
 <img src="./images/10.png" alt="《黑神话：无缝转场》视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -876,7 +877,7 @@
 </div>
 </div>
 <!-- Project 11 -->
-<div class="portfolio-card min-w-[400px] w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="11" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="11" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630825&amp;mid=qd9g4rGBy5NQv86Z" onclick="startVideo(this)">
 <img src="./images/11.jpg" alt="4K 多机位实时直播 视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -903,7 +904,7 @@
 </div>
 </div>
 <!-- Project 12 -->
-<div class="portfolio-card min-w-[400px] w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="12" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="12" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630830&amp;mid=d0Nq7M3J8GE4O2Vj" onclick="startVideo(this)">
 <img src="./images/2.png" alt="视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -926,6 +927,12 @@
 <p class="text-zinc-500 text-sm leading-relaxed line-clamp-3" style="">
             线下活动最难捕获的不是现场的人数，而是那一刻的"情绪浓度"。在这部快剪作品中，我试图通过紧凑的视听剪辑，让观众即使不在现场，也能瞬间被那份属于"梨游学"的热情与氛围所感染。
           </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1022,11 +1029,13 @@
 </div>
 </div>
 </div>
-</div>
-</section>
-<!-- Footer/End Page Section -->
+      </div>
+      </div>
+    </div>
+    </section>
+    <!-- Footer/End Page Section -->
 <section class="w-full bg-surface-container-low py-32 flex flex-col items-center justify-center text-center px-6" id="footer">
-<h2 class="text-5xl md:text-7xl font-black text-on-surface tracking-tight font-headline" style="">就这些了，朋友们👋</h2>
+<h2 class="text-3xl md:text-7xl font-black text-on-surface tracking-tight font-headline whitespace-nowrap">就这些了，朋友们👋</h2>
 <p class="text-lg md:text-xl text-zinc-500 mt-4 font-body" style="">想了解更多关于我的信息吗？</p>
 <div class="relative group/resume-btn mt-8">
 <button class="bg-primary-container text-on-primary-container px-10 py-4 rounded-full font-bold text-lg hover:scale-105 active:scale-95 transition-all" onclick="toggleResumeMenu(event)" style="">
@@ -1035,18 +1044,12 @@
 <!-- Resume Dropdown Menu for Footer -->
 <div class="absolute left-1/2 -translate-x-1/2 top-full mt-4 w-64 bg-white/70 backdrop-blur-xl border border-white/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden z-[60] animate-in fade-in slide-in-from-top-2 duration-200 hidden" id="resume-dropdown-footer">
 <div class="p-2" id="resume-menu-content-footer">
-      <button class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-white/50 transition-colors text-left group/item">
+      <a download="戴雅_简历.pdf" href="./戴雅简历.pdf" class="flex items-center gap-4 p-4 rounded-xl hover:bg-white/50 transition-colors group/item">
         <div class="w-10 h-10 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover/item:bg-primary-container group-hover/item:text-on-primary-container transition-colors">
           <span class="material-symbols-outlined text-xl">download</span>
         </div>
         <span class="font-bold text-zinc-900">下载简历</span>
-      </button>
-      <button onclick="showEmailInput(event)" class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-white/50 transition-colors text-left group/item">
-        <div class="w-10 h-10 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover/item:bg-primary-container group-hover/item:text-on-primary-container transition-colors">
-          <span class="material-symbols-outlined text-xl">send</span>
-        </div>
-        <span class="font-bold text-zinc-900">发送简历至邮箱</span>
-      </button>
+      </a>
     </div>
 </div>
 </div>
@@ -1066,9 +1069,9 @@
 <p class="text-sm font-medium text-zinc-500" style="">© 2024 Portfolio. Designed with Radiant Minimalism.</p>
 </footer>
 <!-- 视频播放器弹窗 -->
-<div id="video-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity">
-  <button onclick="closeVideo()" class="absolute top-8 right-8 text-white"><span class="material-symbols-outlined text-4xl">close</span></button>
-  <div class="w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl" id="video-container">
+<div id="video-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4 md:p-8 bg-black/80 backdrop-blur-md transition-opacity" onclick="if(event.target===this)closeVideo()">
+  <button onclick="closeVideo()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white z-10"><span class="material-symbols-outlined text-4xl">close</span></button>
+  <div class="w-full md:w-[90vw] md:max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl" id="video-container">
   </div>
 </div>
 
@@ -1076,7 +1079,7 @@
     function openVideo(videoUrl) {
         const container = document.getElementById('video-container');
         // 使用 iframe 嵌入，适配大多数视频平台
-        container.innerHTML = `<iframe src="${videoUrl}" class="w-full h-full" allowfullscreen></iframe>`;
+        container.innerHTML = `<iframe src="${videoUrl}?autoplay=1" class="w-full h-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen style="border:none;"></iframe>`;
         document.getElementById('video-modal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     }
@@ -1101,6 +1104,7 @@
         const icon = isDark ? 'light_mode' : 'dark_mode';
         const el = document.getElementById('dark-icon');
         if (el) el.textContent = icon;
+        window.dispatchEvent(new CustomEvent('theme-changed'));
       }
 
       applyDark(saved === 'dark' || (!saved && prefersDark));
@@ -1125,16 +1129,26 @@
         if (!section || !container) return;
         const card = container.querySelector('.portfolio-card[data-card-id="' + String(dataCardId) + '"]');
         if (!card) return;
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        var align = function () {
-            var max = Math.max(0, container.scrollWidth - window.innerWidth + 96);
-            var centerPad = Math.max(0, (window.innerWidth - card.offsetWidth) / 2 - 24);
-            var target = card.offsetLeft - centerPad;
-            target = Math.max(0, Math.min(target, max));
+
+        const max = Math.max(0, container.scrollWidth - window.innerWidth + 96);
+        const centerPad = Math.max(0, (window.innerWidth - card.offsetWidth) / 2 - 24);
+        const target = Math.max(0, Math.min(card.offsetLeft - centerPad, max));
+
+        // 找到 portfolio 的 ScrollTrigger
+        const pst = ScrollTrigger.getAll().find((st) => st.vars?.trigger?.id === 'portfolio-pin-wrapper');
+        if (pst) {
+            const progress = target / max;
+            const targetScroll = typeof pst.start === 'number' ? pst.start : window.scrollY;
+            window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+            pst.progress = progress;
             window.portfolioStrip.x = target;
-            container.style.transform = 'translateX(-' + target + 'px)';
-        };
-        setTimeout(align, 480);
+        } else {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => {
+                window.portfolioStrip.x = target;
+                container.style.transform = 'translateX(-' + target + 'px)';
+            }, 480);
+        }
     }
 
     // ... GSAP and other scripts below
@@ -1143,46 +1157,108 @@
 <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    // About Me Text Fade Animation - 逐字变色效果
+    // About Me 逐字变色动画（起止色随明暗模式由 CSS 变量控制，夜间模式揭示为浅色字）
     const aboutSection = document.getElementById('about');
     const aboutParas = document.querySelectorAll('#about-content p');
-    
-    // 将每个字符包装成span
+
+    function aboutRevealColors() {
+        const s = getComputedStyle(document.documentElement);
+        return {
+            from: s.getPropertyValue('--about-text-reveal-from').trim() || '#999999',
+            to: s.getPropertyValue('--about-text-reveal-to').trim() || '#1b1c1c',
+        };
+    }
+
+    // 将每个字符包装成 span（保留空格）
     aboutParas.forEach((p) => {
+        if (p.querySelector('.char')) return;
         const text = p.textContent;
+        const { from } = aboutRevealColors();
         let html = '';
-        for (let char of text) {
-            html += `<span class="char">${char}</span>`;
+        for (const char of text) {
+            if (char === ' ') {
+                html += ' ';
+            } else {
+                html += '<span class="char" style="display:inline-block;color:' + from + ';">' + char + '</span>';
+            }
         }
         p.innerHTML = html;
     });
-    
-    // 创建timeline来控制整个动画
-    const tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: aboutSection,
-            start: 'top top',
-            end: 'bottom+=3000px bottom',
-            scrub: 1,
-            pin: true,
-            pinSpacing: true
-        }
-    });
-    
-    // 获取所有字符
+
     const allChars = document.querySelectorAll('#about-content .char');
-    
-    // 为每个字符添加动画
-    allChars.forEach((char, index) => {
-        tl.fromTo(char,
-            { color: '#999999' },
-            { color: '#1b1c1c' },
-            index * 0.15  // 增加延迟到0.15秒，让滚动更慢
-        );
-    });
+    let aboutMobileScrollProgress = 0;
+    let aboutMobileScrollHandler = null;
+
+    function setupAboutReveal() {
+        ScrollTrigger.getById('about-reveal')?.kill();
+        if (aboutMobileScrollHandler) {
+            window.removeEventListener('scroll', aboutMobileScrollHandler);
+            aboutMobileScrollHandler = null;
+        }
+
+        const { from, to } = aboutRevealColors();
+        const isMobile = window.innerWidth < 768;
+
+        if (!isMobile) {
+            gsap.set(allChars, { color: from });
+            const tl = gsap.timeline();
+            allChars.forEach((char, i) => {
+                tl.to(char, { color: to, ease: 'none', duration: 0.4 }, i * 0.12);
+            });
+            ScrollTrigger.create({
+                id: 'about-reveal',
+                trigger: aboutSection,
+                start: 'top top',
+                end: () => `+=${allChars.length * 0.12 * window.innerHeight * 0.15}`,
+                pin: true,
+                pinSpacing: true,
+                scrub: 1,
+                anticipatePin: 1,
+                onLeave: () => {
+                    const offset = window.scrollY;
+                    ScrollTrigger.refresh();
+                    window.scrollTo(0, offset);
+                },
+                animation: tl,
+            });
+        } else {
+            const totalChars = allChars.length;
+
+            function updateCharsByProgress(progress) {
+                aboutMobileScrollProgress = progress;
+                const c = aboutRevealColors();
+                const targetIndex = Math.round(progress * totalChars);
+                allChars.forEach((char, i) => {
+                    char.style.color = i < targetIndex ? c.to : c.from;
+                });
+            }
+
+            aboutMobileScrollHandler = () => {
+                const rect = aboutSection.getBoundingClientRect();
+                const sectionH = aboutSection.offsetHeight;
+                if (rect.top > window.innerHeight) {
+                    updateCharsByProgress(0);
+                } else if (rect.bottom < 0) {
+                    updateCharsByProgress(1);
+                } else {
+                    const scrolled = Math.max(0, -rect.top + window.innerHeight * 0.4);
+                    const p = Math.min(1, scrolled / (sectionH * 0.7));
+                    updateCharsByProgress(p);
+                }
+            };
+            window.addEventListener('scroll', aboutMobileScrollHandler, { passive: true });
+            updateCharsByProgress(aboutMobileScrollProgress);
+        }
+        ScrollTrigger.refresh();
+    }
+
+    setupAboutReveal();
+    window.addEventListener('theme-changed', setupAboutReveal);
 
   function startVideo(element) {
-    element.classList.add('playing');
+    const videoSrc = element.getAttribute('data-video-src');
+    if (!videoSrc) return;
+    openVideo(videoSrc);
   }
 
     // Video Modal - 点击放大视频播放
@@ -1235,71 +1311,68 @@
     }
   }
 
-  // 个人作品横向滚动控制
+  // 个人作品横向滚动控制 - 统一 GSAP ScrollTrigger（桌面+移动端）
   document.addEventListener('DOMContentLoaded', () => {
-    const portfolioSection = document.getElementById('my-portfolio');
-    const container = document.getElementById('portfolio-container');
-    if (!portfolioSection || !container) return;
+    // 确保 DOM 准备好
+    initPortfolioScroll();
 
-    window.portfolioStrip.container = container;
-    let scrollX = window.portfolioStrip.x || 0;
-    container.style.transform = `translateX(-${scrollX}px)`;
-    const getMaxScroll = () => Math.max(0, container.scrollWidth - window.innerWidth + 96);
-    const isMobile = window.innerWidth < 768;
-
-    // ---- 桌面端：滚轮横向滚动（保持原有逻辑不变） ----
-    if (!isMobile) {
-      let wheelDelta = 0;
-      document.addEventListener('wheel', (e) => {
-        const rect = portfolioSection.getBoundingClientRect();
-        const isPortfolioFullyInView = rect.top <= window.innerHeight * 0.3;
-        if (!isPortfolioFullyInView) return;
-        wheelDelta += e.deltaY;
-        if (Math.abs(wheelDelta) > 10) {
-          const newScrollX = scrollX + Math.sign(wheelDelta) * 100;
-          const clampedScrollX = Math.max(0, Math.min(newScrollX, getMaxScroll()));
-          if (clampedScrollX !== scrollX) {
-            e.preventDefault();
-            scrollX = clampedScrollX;
-            window.portfolioStrip.x = scrollX;
-            container.style.transform = `translateX(-${scrollX}px)`;
-            wheelDelta = 0;
-          } else {
-            wheelDelta = 0;
-          }
+    // 监听 resize，重新初始化（处理移动端地址栏跳动）
+    window.addEventListener('resize', () => {
+      // 销毁旧的 ScrollTrigger
+      ScrollTrigger.getAll().forEach(st => {
+        if (st.vars?.trigger?.id === 'portfolio-pin-wrapper') {
+          st.kill();
         }
-      }, { passive: false });
-    }
-
-    // ---- 手机端：竖向滚动驱动卡片左移 ----
-    if (isMobile) {
-      let lockedScrollX = null;
-      let startY = 0;
-
-      document.addEventListener('touchstart', (e) => {
-        const rect = portfolioSection.getBoundingClientRect();
-        const vh = window.innerHeight;
-        if (rect.top <= vh && rect.bottom >= 0) {
-          lockedScrollX = scrollX;
-          startY = e.touches[0].clientY;
-        }
-      }, { passive: false });
-
-      document.addEventListener('touchmove', (e) => {
-        if (lockedScrollX === null) return;
-        const deltaY = e.touches[0].clientY - startY;
-        // 向下拖（deltaY > 0）-> 卡片左移
-        const sensitivity = 1.5;
-        scrollX = Math.max(0, Math.min(lockedScrollX + deltaY * sensitivity, getMaxScroll()));
-        window.portfolioStrip.x = scrollX;
-        container.style.transform = `translateX(-${scrollX}px)`;
-      }, { passive: false });
-
-      document.addEventListener('touchend', () => {
-        lockedScrollX = null;
       });
-    }
+      // 重新初始化
+      initPortfolioScroll();
+    });
   });
+
+  function initPortfolioScroll() {
+    const portfolioSection = document.getElementById('my-portfolio');
+    const pinWrapper = document.getElementById('portfolio-pin-wrapper');
+    const container = document.getElementById('portfolio-container');
+
+    if (!portfolioSection || !pinWrapper || !container) return;
+
+    // 重置容器状态
+    container.style.transform = 'translateX(0px)';
+    window.portfolioStrip.x = 0;
+
+    // 计算横向滚动距离
+    const getScrollDistance = () => {
+      const scrollWidth = container.scrollWidth;
+      const viewportWidth = window.innerWidth;
+      const padding = viewportWidth < 768 ? 32 : 96; // 移动端 32px，桌面 96px
+      return Math.max(0, scrollWidth - viewportWidth + padding);
+    };
+
+    const totalH = getScrollDistance();
+
+    // 如果没有横向滚动空间，不创建 ScrollTrigger
+    if (totalH <= 0) return;
+
+    // 创建 GSAP ScrollTrigger - 统一的横滑效果
+    const st = ScrollTrigger.create({
+      trigger: pinWrapper,
+      start: 'top top',
+      end: () => `+=${getScrollDistance()}`,
+      pin: true,
+      pinSpacing: true,
+      scrub: 1,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => {
+        const x = self.progress * getScrollDistance();
+        container.style.transform = `translateX(-${x}px)`;
+        window.portfolioStrip.x = x;
+      }
+    });
+
+    // 保存 ScrollTrigger 引用
+    window.portfolioScrollTrigger = st;
+  }
 
   // 视频懒加载功能
   function initVideoLazyLoad() {
@@ -1356,78 +1429,20 @@
 <script>
   function toggleResumeMenu(event) {
     event.stopPropagation();
-    
-    // 判断是哪个按钮被点击，确定操作哪个菜单
     const button = event.target.closest('button');
     const footerSection = document.getElementById('footer');
     const isFooterMenu = footerSection.contains(button);
-    
     const dropdownId = isFooterMenu ? 'resume-dropdown-footer' : 'resume-dropdown';
     const dropdown = document.getElementById(dropdownId);
     const isHidden = dropdown.classList.contains('hidden');
-    
-    // 关闭另一个菜单
     const otherDropdownId = isFooterMenu ? 'resume-dropdown' : 'resume-dropdown-footer';
     const otherDropdown = document.getElementById(otherDropdownId);
-    if (otherDropdown) {
-      otherDropdown.classList.add('hidden');
-    }
-    
+    if (otherDropdown) otherDropdown.classList.add('hidden');
     if (isHidden) {
-      resetResumeMenu(dropdownId);
       dropdown.classList.remove('hidden');
     } else {
       dropdown.classList.add('hidden');
     }
-  }
-
-  function showEmailInput(event) {
-    event.stopPropagation();
-    
-    // 判断是哪个菜单中的按钮
-    const button = event.target.closest('button');
-    const footerSection = document.getElementById('footer');
-    const isFooterMenu = footerSection.contains(button);
-    const containerId = isFooterMenu ? 'resume-menu-content-footer' : 'resume-menu-content';
-    
-    const container = document.getElementById(containerId);
-    container.innerHTML = `
-      <div class="p-4 space-y-4">
-        <p class="text-xs font-bold text-zinc-400 uppercase tracking-wider">输入您的邮箱</p>
-        <div class="flex flex-col gap-2">
-          <input type="email" placeholder="email@example.com" class="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-white/50 focus:outline-none focus:ring-2 focus:ring-primary-container text-sm">
-          <button class="w-full bg-primary-container text-on-primary-container py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity">
-            发送
-          </button>
-        </div>
-        <button onclick="resetResumeMenu('${containerId}')" class="w-full text-center text-xs text-zinc-400 hover:text-zinc-600 font-medium">返回</button>
-      </div>
-    `;
-  }
-
-  function resetResumeMenu(containerId) {
-    // 如果没有提供containerId，默认重置两个菜单
-    if (!containerId) {
-      resetResumeMenu('resume-menu-content');
-      resetResumeMenu('resume-menu-content-footer');
-      return;
-    }
-    
-    const container = document.getElementById(containerId);
-    container.innerHTML = `
-      <button class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-white/50 transition-colors text-left group/item">
-        <div class="w-10 h-10 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover/item:bg-primary-container group-hover/item:text-on-primary-container transition-colors">
-          <span class="material-symbols-outlined text-xl">download</span>
-        </div>
-        <span class="font-bold text-zinc-900">下载简历</span>
-      </button>
-      <button onclick="showEmailInput(event)" class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-white/50 transition-colors text-left group/item">
-        <div class="w-10 h-10 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover/item:bg-primary-container group-hover/item:text-on-primary-container transition-colors">
-          <span class="material-symbols-outlined text-xl">send</span>
-        </div>
-        <span class="font-bold text-zinc-900">发送简历至邮箱</span>
-      </button>
-    `;
   }
 
   window.addEventListener('click', () => {
