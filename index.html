@@ -1,3 +1,614 @@
+<!DOCTYPE html><html lang="zh"><head></head><body class="bg-surface text-on-surface antialiased overflow-x-hidden" style="overflow-x: hidden;">
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error-container": "var(--error-container)",
+              "primary-fixed-dim": "var(--primary-fixed-dim)",
+              "tertiary-container": "var(--tertiary-container)",
+              "tertiary-fixed": "var(--tertiary-fixed)",
+              "outline": "var(--outline)",
+              "on-error": "var(--on-error)",
+              "surface-container-highest": "var(--surface-container-highest)",
+              "on-secondary-fixed-variant": "var(--on-secondary-fixed-variant)",
+              "on-secondary": "var(--on-secondary)",
+              "surface": "var(--surface)",
+              "on-tertiary": "var(--on-tertiary)",
+              "secondary-container": "var(--secondary-container)",
+              "secondary-fixed": "var(--secondary-fixed)",
+              "on-primary-container": "var(--on-primary-container)",
+              "surface-variant": "var(--surface-variant)",
+              "outline-variant": "var(--outline-variant)",
+              "secondary-fixed-dim": "var(--secondary-fixed-dim)",
+              "on-surface-variant": "var(--on-surface-variant)",
+              "surface-container-low": "var(--surface-container-low)",
+              "inverse-primary": "var(--inverse-primary)",
+              "inverse-surface": "var(--inverse-surface)",
+              "on-primary-fixed-variant": "var(--on-primary-fixed-variant)",
+              "on-primary": "var(--on-primary)",
+              "secondary": "var(--secondary)",
+              "surface-bright": "var(--surface-bright)",
+              "surface-container-lowest": "var(--surface-container-lowest)",
+              "primary-fixed": "var(--primary-fixed)",
+              "surface-tint": "var(--surface-tint)",
+              "on-tertiary-container": "var(--on-tertiary-container)",
+              "on-primary-fixed": "var(--on-primary-fixed)",
+              "primary": "var(--primary)",
+              "inverse-on-surface": "var(--inverse-on-surface)",
+              "on-surface": "var(--on-surface)",
+              "surface-container": "var(--surface-container)",
+              "on-error-container": "var(--on-error-container)",
+              "primary-container": "var(--primary-container)",
+              "on-secondary-fixed": "var(--on-secondary-fixed)",
+              "background": "var(--background)",
+              "surface-container-high": "var(--surface-container-high)",
+              "on-background": "var(--on-background)",
+              "tertiary-fixed-dim": "var(--tertiary-fixed-dim)",
+              "surface-dim": "var(--surface-dim)",
+              "on-tertiary-fixed-variant": "var(--on-tertiary-fixed-variant)",
+              "error": "var(--error)",
+              "on-secondary-container": "var(--on-secondary-container)",
+              "on-tertiary-fixed": "var(--on-tertiary-fixed)",
+              "tertiary": "var(--tertiary)"
+            },
+            fontFamily: {
+              "headline": ["Inter", "Noto Sans SC"],
+              "body": ["Inter", "Noto Sans SC"],
+              "label": ["Inter", "Noto Sans SC"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        :root {
+          --background: #fbf9f8;
+          --on-background: #1b1c1c;
+          --surface: #fbf9f8;
+          --surface-bright: #fbf9f8;
+          --surface-container-lowest: #ffffff;
+          --surface-container-low: #f5f3f3;
+          --surface-container: #efeded;
+          --surface-container-high: #e9e8e7;
+          --surface-container-highest: #e4e2e2;
+          --surface-dim: #dbdad9;
+          --surface-variant: #e4e2e2;
+          --on-surface: #1b1c1c;
+          --on-surface-variant: #4d4732;
+          --outline: #7e775f;
+          --outline-variant: #d0c6ab;
+          --inverse-surface: #303031;
+          --inverse-on-surface: #f2f0f0;
+          --inverse-primary: #e9c400;
+          --primary: #705d00;
+          --primary-container: #ffd700;
+          --primary-fixed: #ffe16d;
+          --primary-fixed-dim: #e9c400;
+          --on-primary: #ffffff;
+          --on-primary-container: #705e00;
+          --on-primary-fixed: #221b00;
+          --on-primary-fixed-variant: #544600;
+          --secondary: #5e5e5e;
+          --secondary-container: #e2e2e2;
+          --secondary-fixed: #e2e2e2;
+          --secondary-fixed-dim: #c6c6c6;
+          --on-secondary: #ffffff;
+          --on-secondary-container: #646464;
+          --on-secondary-fixed: #1b1b1b;
+          --on-secondary-fixed-variant: #474747;
+          --tertiary: #765b00;
+          --tertiary-container: #ffd569;
+          --tertiary-fixed: #ffdf94;
+          --tertiary-fixed-dim: #f5bf00;
+          --on-tertiary: #ffffff;
+          --on-tertiary-container: #775b00;
+          --on-tertiary-fixed: #251a00;
+          --on-tertiary-fixed-variant: #594400;
+          --error: #ba1a1a;
+          --error-container: #ffdad6;
+          --on-error: #ffffff;
+          --on-error-container: #93000a;
+          --surface-tint: #705d00;
+          /* 关于我：逐字揭示起止色（浅色模式） */
+          --about-text-reveal-from: #999999;
+          --about-text-reveal-to: #1b1c1c;
+        }
+        .dark {
+          --background: #1b1c1c;
+          --on-background: #f2f0f0;
+          --surface: #1b1c1c;
+          --surface-bright: #2b2b2c;
+          --surface-container-lowest: #151516;
+          --surface-container-low: #1f1f20;
+          --surface-container: #252526;
+          --surface-container-high: #303031;
+          --surface-container-highest: #3c3c3d;
+          --surface-dim: #141414;
+          --surface-variant: #4d493c;
+          --on-surface: #f2f0f0;
+          --on-surface-variant: #cec6b4;
+          --outline: #938e7c;
+          --outline-variant: #4d493c;
+          --inverse-surface: #f2f0f0;
+          --inverse-on-surface: #303031;
+          --inverse-primary: #8b7200;
+          --primary: #e9c400;
+          --primary-container: #544600;
+          --primary-fixed: #ffe16d;
+          --primary-fixed-dim: #c8a500;
+          --on-primary: #3a3000;
+          --on-primary-container: #ffe16d;
+          --on-primary-fixed: #3a3000;
+          --on-primary-fixed-variant: #cec6b4;
+          --secondary: #b3b3b3;
+          --secondary-container: #474747;
+          --secondary-fixed: #b3b3b3;
+          --secondary-fixed-dim: #999999;
+          --on-secondary: #2e2e2e;
+          --on-secondary-container: #e2e2e2;
+          --on-secondary-fixed: #2e2e2e;
+          --on-secondary-fixed-variant: #cec6b4;
+          --tertiary: #f5bf00;
+          --tertiary-container: #574400;
+          --tertiary-fixed: #ffdf94;
+          --tertiary-fixed-dim: #c8a500;
+          --on-tertiary: #3a3000;
+          --on-tertiary-container: #ffdf94;
+          --on-tertiary-fixed: #3a3000;
+          --on-tertiary-fixed-variant: #cec6b4;
+          --error: #ffb4ab;
+          --error-container: #93000a;
+          --on-error: #690005;
+          --on-error-container: #ffdad6;
+          --surface-tint: #e9c400;
+          /* 关于我：逐字揭示起止色（夜间模式，避免「黑字压暗底」） */
+          --about-text-reveal-from: rgba(242, 240, 240, 0.42);
+          --about-text-reveal-to: #f2f0f0;
+        }
+        body {
+          font-family: 'Inter', 'Noto Sans SC', sans-serif;
+          background-color: var(--background);
+          color: var(--on-background);
+          transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, rgba(251, 249, 248, 0) 70%);
+            z-index: -1;
+            filter: blur(60px);
+        }
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 4s ease-in-out infinite;
+        }
+        /* Infinite Scroll Animation */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-100% / 2)); }
+        }
+        .scroll-container {
+            display: flex;
+            width: max-content;
+            animation: scroll 40s linear infinite;
+        }
+        .scroll-container:hover {
+            animation-play-state: paused;
+        }
+        /* Modal visibility toggle */
+        #contact-modal:not(.hidden) {
+            display: flex;
+        }
+        .project-card {
+            border-radius: 2rem; /* 32px */
+        }
+        /* Portfolio card scrollbar hide */
+        .no-scrollbar::-webkit-scrollbar,
+        .scrollbar-none::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar,
+        .scrollbar-none {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Video Thumbnail Overlay Styles */
+        .project-card {
+            position: relative;
+        }
+        
+        .video-thumbnail {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2rem;
+            opacity: 1;
+        }
+        
+        .video-thumbnail:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .play-button-icon {
+            font-size: 80px;
+            color: white;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+        
+        .video-thumbnail:hover .play-button-icon {
+            transform: scale(1.1);
+        }
+        
+        .project-card iframe {
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .project-card.playing iframe {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .project-card.playing .video-thumbnail {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #portfolio .project-card iframe {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #portfolio .hero-strip-cover {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 4;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        #portfolio .project-card.playing .hero-strip-cover {
+            opacity: 0;
+        }
+        .video-container {
+            background-color: #18181b;
+        }
+        
+        .video-container .thumbnail-img {
+            z-index: 20;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .video-container.playing .thumbnail-img {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .video-container iframe {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 5;
+        }
+        
+        .video-container.playing iframe {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .play-button {
+            z-index: 25;
+            cursor: pointer;
+        }
+    </style>
+<!-- Contact Modal -->
+<div class="fixed inset-0 z-[100] items-center justify-center p-4 hidden" id="contact-modal">
+<div class="absolute inset-0 bg-black/40 backdrop-blur-md" onclick="closeModal()"></div>
+<div class="relative w-full max-w-md bg-white rounded-[24px] shadow-2xl p-8 transform transition-all duration-300 scale-100 animate-in fade-in zoom-in-95">
+<button class="absolute top-6 right-6 text-zinc-400 hover:text-zinc-900 transition-colors" onclick="closeModal()" style="">
+<span class="material-symbols-outlined text-2xl" style="">close</span>
+</button>
+<h2 class="text-2xl font-bold text-zinc-900 mb-8" style="">联系我</h2>
+<div class="flex flex-col gap-4">
+<a class="flex items-center gap-4 p-4 rounded-xl border border-zinc-100 hover:bg-zinc-50 hover:border-zinc-200 transition-all group" href="tel:+8612345678900" style="">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="">call</span>
+</div>
+<div>
+<p class="text-xs font-bold text-zinc-400 uppercase tracking-wider" style="">拨打电话</p>
+<p class="text-zinc-900 font-bold" style="">19976672113</p>
+</div>
+</a>
+<a class="flex items-center gap-4 p-4 rounded-xl border border-zinc-100 hover:bg-zinc-50 hover:border-zinc-200 transition-all group" href="https://wa.me/8612345678900" style="">
+<div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="">chat</span>
+</div>
+<div>
+<p class="text-xs font-bold text-zinc-400 uppercase tracking-wider" style="">微信联系</p>
+<p class="text-zinc-900 font-bold" style="">dy2062003872</p>
+</div>
+</a>
+<a class="flex items-center gap-4 p-4 rounded-xl border border-zinc-100 hover:bg-zinc-50 hover:border-zinc-200 transition-all group" href="mailto:hhalo-dy@outlook.com" style="">
+<div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="">mail</span>
+</div>
+<div>
+<p class="text-xs font-bold text-zinc-400 uppercase tracking-wider" style="">发送邮件</p>
+<p class="text-zinc-900 font-bold" style="">hhalo-dy@outlook.com</p>
+</div>
+</a>
+</div>
+</div>
+</div>
+<!-- Header / Navigation：手机端链接与按钮挨在一起、胶囊随内容收窄居中；桌面 w-max -->
+<header class="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-max max-w-[calc(100vw-1.5rem)] sm:w-max sm:max-w-none">
+  <div class="rounded-full border border-[var(--outline-variant)] bg-[var(--surface-container-lowest)]/80 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.06)] flex flex-nowrap items-center justify-start gap-2 sm:gap-4 md:gap-5 px-3 sm:px-6 py-2 sm:py-3 w-max max-w-full">
+    <nav class="flex flex-nowrap items-center gap-2.5 sm:gap-4 md:gap-6 min-w-0 max-w-[calc(100vw-9.5rem)] sm:max-w-none sm:flex-none overflow-x-auto scrollbar-none sm:overflow-visible touch-pan-x">
+      <a class="text-[11px] sm:text-sm font-bold text-[var(--on-surface)] border-b-2 border-[var(--primary-fixed)] pb-0.5 whitespace-nowrap shrink-0" href="#">首页</a>
+      <a class="text-[11px] sm:text-sm font-medium text-[var(--on-surface-variant)] hover:text-[var(--on-surface)] transition-colors whitespace-nowrap shrink-0" href="#about">关于我</a>
+      <a class="text-[11px] sm:text-sm font-medium text-[var(--on-surface-variant)] hover:text-[var(--on-surface)] transition-colors whitespace-nowrap shrink-0" href="#my-portfolio">个人作品</a>
+      <a class="text-[11px] sm:text-sm font-medium text-[var(--on-surface-variant)] hover:text-[var(--on-surface)] transition-colors whitespace-nowrap shrink-0" href="#skills">个人荣誉/技能</a>
+    </nav>
+    <div class="hidden sm:block w-px h-5 shrink-0 bg-[var(--outline-variant)]" aria-hidden="true"></div>
+    <div class="flex flex-nowrap items-center gap-1.5 sm:gap-3 shrink-0">
+      <button type="button" id="dark-toggle" class="w-10 h-10 sm:w-8 sm:h-8 rounded-full flex items-center justify-center bg-[var(--surface-container-high)]/60 sm:bg-transparent hover:bg-[var(--surface-container-high)] transition-all active:scale-90" aria-label="切换明暗模式">
+        <span class="material-symbols-outlined text-[22px] sm:text-[20px] text-[var(--on-surface-variant)] leading-none" id="dark-icon">dark_mode</span>
+      </button>
+      <div class="relative group/resume-btn">
+        <a download="戴雅_简历.pdf" href="./戴雅简历.pdf" class="bg-[var(--primary-container)] text-[var(--on-primary-container)] px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-sm font-bold hover:scale-105 active:scale-95 transition-all whitespace-nowrap cursor-pointer">获取简历</a>
+        <div class="absolute right-0 mt-3 w-64 bg-[var(--surface-container-lowest)]/90 backdrop-blur-xl border border-[var(--outline-variant)] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.12)] overflow-hidden z-[60] animate-in fade-in slide-in-from-top-2 duration-200 hidden" id="resume-dropdown">
+          <div class="p-2" id="resume-menu-content">
+            <a download="戴雅_简历.pdf" href="./戴雅简历.pdf" class="flex items-center gap-4 p-4 rounded-xl hover:bg-[var(--surface-container-high)] transition-colors group/item">
+              <div class="w-10 h-10 rounded-full bg-[var(--surface-container-high)] flex items-center justify-center text-[var(--on-surface-variant)] group-hover/item:bg-[var(--primary-container)] group-hover/item:text-[var(--on-primary-container)] transition-colors">
+                <span class="material-symbols-outlined text-xl">download</span>
+              </div>
+              <span class="font-bold text-[var(--on-surface)]">下载简历</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Main Hero Section (Integrated 1st Fold) -->
+<main class="relative flex flex-col justify-start overflow-hidden">
+<!-- Background Blobs -->
+<div class="hero-blob top-[-10%] left-[-5%]"></div>
+<div class="hero-blob top-[20%] right-[-5%]"></div>
+<!-- Hero Content Layer -->
+<div class="max-w-7xl mx-auto w-full px-6 pt-24 sm:pt-28 pb-8 sm:pb-12 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start lg:items-center">
+<!-- Left Column: Content -->
+<div class="order-2 lg:order-1 space-y-8">
+<div class="space-y-4">
+<h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1]" style="">
+                你好👋, 我是<br>
+<span class="inline-block relative" style="">戴雅
+                    <span class="absolute bottom-2 left-0 w-full h-4 bg-primary-container/40 -z-10 rounded-full"></span>
+</span>
+</h1>
+<h2 class="flex flex-row flex-nowrap items-baseline gap-3 sm:gap-4 md:gap-6 text-base sm:text-lg md:text-2xl lg:text-3xl font-bold font-headline text-[var(--on-surface)] leading-tight tracking-tight">
+                <span class="whitespace-nowrap">用真实的镜头讲故事，</span>
+                <span class="whitespace-nowrap">用 AI 提高生产力。</span>
+            </h2>
+</div>
+<div class="flex flex-wrap gap-4 items-center">
+<button class="bg-primary-fixed-dim text-on-primary-fixed px-8 py-4 rounded-full font-bold text-lg hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/10" onclick="openModal()" style="">
+                联系我
+            </button>
+<a class="bg-transparent border-2 border-outline-variant text-on-surface px-8 py-4 rounded-full font-bold text-lg hover:bg-surface-container-low hover:scale-105 active:scale-95 transition-all" href="#my-portfolio" style="">
+                浏览作品
+            </a>
+</div>
+</div>
+<!-- Right Column: Visual Avatar -->
+<div class="order-1 lg:order-2 flex justify-center lg:justify-end relative">
+<div class="relative w-full max-w-md flex items-end justify-center transition-transform duration-700 h-full">
+<img alt="Daya Avatar" class="w-auto h-full max-h-[80vh] object-contain" src="./1_transparent.gif" decoding="async">
+</div>
+<div class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary-container/10 to-transparent rounded-full blur-3xl opacity-50"></div>
+</div>
+</div>
+<!-- Integrated Sliding Gallery Section -->
+<section class="w-full pb-20 pt-6 sm:pt-8 mt-4 sm:mt-8" id="portfolio">
+<div class="relative overflow-hidden group">
+<!-- Soft Fade Gradients -->
+<div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none"></div>
+<div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none"></div>
+<!-- Infinite Scroll Container -->
+<div class="scroll-container flex gap-8 px-8 py-4">
+<!-- Project Card 1 — 品牌纪实 → 个人作品 Project 1 《篇章》 -->
+<div class="hero-carousel-item w-[450px] flex-shrink-0 group/card cursor-pointer">
+<div class="project-card w-full aspect-[4/3] bg-zinc-900 overflow-hidden shadow-sm transition-all duration-500 group-hover/card:shadow-xl group-hover/card:-translate-y-2" onclick="event.stopPropagation(); playVideo(this.closest('.hero-carousel-item'));">
+  <img src="./images/3.png" alt="" class="hero-strip-cover" decoding="async">
+  <div class="video-thumbnail">
+    <span class="material-symbols-outlined play-button-icon">play_circle</span>
+  </div>
+<iframe src="https://player.xinpianchang.com/?aid=13630824&amp;mid=DaLZwPzeR3EQnrjY" allowfullscreen="" allow="fullscreen" frameborder="0" style="width: 100%; height: 100%; border: medium;"></iframe>
+</div>
+<div class="mt-6 px-4 cursor-pointer" onclick="event.stopPropagation(); goToPortfolioDataCard(1);">
+<div class="flex gap-2 mb-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full uppercase" style="">AI Workflow</span>
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full uppercase" style="">Education</span>
+</div>
+<h3 class="text-lg font-black text-on-surface" style="">品牌纪实</h3>
+</div>
+</div>
+<!-- Project Card 2 — 现象级直播 → 个人作品 Project 11 -->
+<div class="hero-carousel-item w-[450px] flex-shrink-0 group/card cursor-pointer">
+<div class="project-card w-full aspect-[4/3] bg-zinc-900 overflow-hidden shadow-sm transition-all duration-500 group-hover/card:shadow-xl group-hover/card:-translate-y-2" onclick="event.stopPropagation(); playVideo(this.closest('.hero-carousel-item'));">
+  <img src="./images/11.jpg" alt="" class="hero-strip-cover" decoding="async">
+  <div class="video-thumbnail">
+    <span class="material-symbols-outlined play-button-icon">play_circle</span>
+  </div>
+<iframe src="https://player.xinpianchang.com/?aid=13630825&amp;mid=qd9g4rGBy5NQv86Z" allowfullscreen="" allow="fullscreen" frameborder="0" style="width: 100%; height: 100%; border: medium;"></iframe>
+</div>
+<div class="mt-6 px-4 cursor-pointer" onclick="event.stopPropagation(); goToPortfolioDataCard(11);">
+<div class="flex gap-2 mb-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full uppercase" style="">Directing</span>
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full uppercase" style="">Live</span>
+</div>
+<h3 class="text-lg font-black text-on-surface" style="">现象级直播案例</h3>
+</div>
+</div>
+<!-- Project Card 3 — AI影像 → 个人作品 Project 5 -->
+<div class="hero-carousel-item w-[450px] flex-shrink-0 group/card cursor-pointer">
+<div class="project-card w-full aspect-[4/3] bg-zinc-900 overflow-hidden shadow-sm transition-all duration-500 group-hover/card:shadow-xl group-hover/card:-translate-y-2" onclick="event.stopPropagation(); playVideo(this.closest('.hero-carousel-item'));">
+  <img src="./images/8.jpg" alt="" class="hero-strip-cover" decoding="async">
+  <div class="video-thumbnail">
+    <span class="material-symbols-outlined play-button-icon">play_circle</span>
+  </div>
+<iframe src="https://player.xinpianchang.com/?aid=13630814&amp;mid=bKG8Qd3oXnL4RJMy" allowfullscreen="" allow="fullscreen" frameborder="0" style="width: 100%; height: 100%; border: medium;"></iframe>
+</div>
+<div class="mt-6 px-4 cursor-pointer" onclick="event.stopPropagation(); goToPortfolioDataCard(5);">
+<div class="flex gap-2 mb-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full uppercase" style="">Creative</span>
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full uppercase" style="">AI</span>
+</div>
+<h3 class="text-lg font-black text-on-surface" style="">AI影像</h3>
+</div>
+</div>
+<!-- Project Card 4 — 个人创作 → 个人作品 Project 9 -->
+<div class="hero-carousel-item w-[450px] flex-shrink-0 group/card cursor-pointer">
+<div class="project-card w-full aspect-[4/3] bg-zinc-900 overflow-hidden shadow-sm transition-all duration-500 group-hover/card:shadow-xl group-hover/card:-translate-y-2" onclick="event.stopPropagation(); playVideo(this.closest('.hero-carousel-item'));">
+  <img src="./images/9.jpg" alt="" class="hero-strip-cover" decoding="async">
+  <div class="video-thumbnail">
+    <span class="material-symbols-outlined play-button-icon">play_circle</span>
+  </div>
+<iframe src="https://player.xinpianchang.com/?aid=13630816&amp;mid=ro1V7E2qRrLwdXAM" allowfullscreen="" allow="fullscreen" frameborder="0" style="width: 100%; height: 100%; border: medium;"></iframe>
+</div>
+<div class="mt-6 px-4 cursor-pointer" onclick="event.stopPropagation(); goToPortfolioDataCard(9);">
+<div class="flex gap-2 mb-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full uppercase" style="">Personal</span>
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full uppercase" style="">Creation</span>
+</div>
+<h3 class="text-lg font-black text-on-surface" style="">个人创作</h3>
+</div>
+</div>
+<!-- Repeated set for seamless scrolling -->
+<div class="hero-carousel-item w-[450px] flex-shrink-0 group/card cursor-pointer">
+<div class="project-card w-full aspect-[4/3] bg-zinc-900 overflow-hidden shadow-sm transition-all duration-500 group-hover/card:shadow-xl group-hover/card:-translate-y-2" onclick="event.stopPropagation(); playVideo(this.closest('.hero-carousel-item'));">
+  <img src="./images/3.png" alt="" class="hero-strip-cover" decoding="async">
+  <div class="video-thumbnail">
+    <span class="material-symbols-outlined play-button-icon">play_circle</span>
+  </div>
+<iframe src="https://player.xinpianchang.com/?aid=13630824&amp;mid=DaLZwPzeR3EQnrjY" allowfullscreen="" allow="fullscreen" frameborder="0" style="width: 100%; height: 100%; border: medium;"></iframe>
+</div>
+<div class="mt-6 px-4 cursor-pointer" onclick="event.stopPropagation(); goToPortfolioDataCard(1);">
+<div class="flex gap-2 mb-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full uppercase" style="">AI Workflow</span>
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full uppercase" style="">Education</span>
+</div>
+<h3 class="text-lg font-black text-on-surface" style="">品牌纪实</h3>
+</div>
+</div>
+<div class="hero-carousel-item w-[450px] flex-shrink-0 group/card cursor-pointer">
+<div class="project-card w-full aspect-[4/3] bg-zinc-900 overflow-hidden shadow-sm transition-all duration-500 group-hover/card:shadow-xl group-hover/card:-translate-y-2" onclick="event.stopPropagation(); playVideo(this.closest('.hero-carousel-item'));">
+  <img src="./images/11.jpg" alt="" class="hero-strip-cover" decoding="async">
+  <div class="video-thumbnail">
+    <span class="material-symbols-outlined play-button-icon">play_circle</span>
+  </div>
+<iframe src="https://player.xinpianchang.com/?aid=13630825&amp;mid=qd9g4rGBy5NQv86Z" allowfullscreen="" allow="fullscreen" frameborder="0" style="width: 100%; height: 100%; border: medium;"></iframe>
+</div>
+<div class="mt-6 px-4 cursor-pointer" onclick="event.stopPropagation(); goToPortfolioDataCard(11);">
+<div class="flex gap-2 mb-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full uppercase" style="">Directing</span>
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full uppercase" style="">Live</span>
+</div>
+<h3 class="text-lg font-black text-on-surface" style="">现象级直播案例</h3>
+</div>
+</div>
+<div class="hero-carousel-item w-[450px] flex-shrink-0 group/card cursor-pointer">
+<div class="project-card w-full aspect-[4/3] bg-zinc-900 overflow-hidden shadow-sm transition-all duration-500 group-hover/card:shadow-xl group-hover/card:-translate-y-2" onclick="event.stopPropagation(); playVideo(this.closest('.hero-carousel-item'));">
+  <img src="./images/8.jpg" alt="" class="hero-strip-cover" decoding="async">
+  <div class="video-thumbnail">
+    <span class="material-symbols-outlined play-button-icon">play_circle</span>
+  </div>
+<iframe src="https://player.xinpianchang.com/?aid=13630814&amp;mid=bKG8Qd3oXnL4RJMy" allowfullscreen="" allow="fullscreen" frameborder="0" style="width: 100%; height: 100%; border: medium;"></iframe>
+</div>
+<div class="mt-6 px-4 cursor-pointer" onclick="event.stopPropagation(); goToPortfolioDataCard(5);">
+<div class="flex gap-2 mb-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full uppercase" style="">Creative</span>
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full uppercase" style="">AI</span>
+</div>
+<h3 class="text-lg font-black text-on-surface" style="">AI影像</h3>
+</div>
+</div>
+<div class="hero-carousel-item w-[450px] flex-shrink-0 group/card cursor-pointer">
+<div class="project-card w-full aspect-[4/3] bg-zinc-900 overflow-hidden shadow-sm transition-all duration-500 group-hover/card:shadow-xl group-hover/card:-translate-y-2" onclick="event.stopPropagation(); playVideo(this.closest('.hero-carousel-item'));">
+  <img src="./images/9.jpg" alt="" class="hero-strip-cover" decoding="async">
+  <div class="video-thumbnail">
+    <span class="material-symbols-outlined play-button-icon">play_circle</span>
+  </div>
+<iframe src="https://player.xinpianchang.com/?aid=13630816&amp;mid=ro1V7E2qRrLwdXAM" allowfullscreen="" allow="fullscreen" frameborder="0" style="width: 100%; height: 100%; border: medium;"></iframe>
+</div>
+<div class="mt-6 px-4 cursor-pointer" onclick="event.stopPropagation(); goToPortfolioDataCard(9);">
+<div class="flex gap-2 mb-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full uppercase" style="">Personal</span>
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full uppercase" style="">Creation</span>
+</div>
+<h3 class="text-lg font-black text-on-surface" style="">个人创作</h3>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Me Section -->
+<section class="relative z-10 max-w-7xl mx-auto px-6 py-32" id="about">
+<div class="max-w-4xl">
+<h2 class="text-7xl font-black font-headline mb-12 tracking-tight" style="">关于我</h2>
+<h3 class="text-3xl font-bold font-headline mb-8 text-primary" style="">Hi, I'm 戴雅.</h3>
+<div class="space-y-6" id="about-content">
+<p class="text-2xl md:text-3xl font-body leading-relaxed" style="color: var(--about-text-reveal-from);">
+        我是戴雅。一名专注影视工业化制作的视觉创作者，拥有 3 年一线实战经验。
+      </p>
+<p class="text-2xl md:text-3xl font-body leading-relaxed" style="color: var(--about-text-reveal-from);">
+        我习惯使用Sony相机配合达芬奇（DaVinci Resolve）完成视觉创作。过去三年，我深度参与了多个商业项目的全链路制作，从 4K 多机位现场直播到后期的精细化调色，我始终坚持用高标准的工业逻辑去交付视觉作品。
+      </p>
+<p class="text-2xl md:text-3xl font-body leading-relaxed" style="color: var(--about-text-reveal-from);">
+        我正在将 AI 引入我的核心工作流。对我而言，AI 不是简单的滤镜工具，而是一个能帮我跳过重复劳动、让我能腾出更多精力去打磨"叙事效果"的视觉杠杆，这个网站就是AI的实践成果。
+      </p>
+<p class="text-2xl md:text-3xl font-body leading-relaxed" style="color: var(--about-text-reveal-from);">
+        我没有浮夸的履历，只有在每一个项目中踏实交付的实战经验。
+      </p>
+</div>
+</div>
+</section>
+<!-- My Portfolio Section：桌面端整块垂直居中；pin 目标为标题+卡片 wrapper -->
+<section class="relative z-0 w-full min-h-screen overflow-hidden flex flex-col items-center md:min-h-[100vh] md:justify-center md:py-12 pt-12 md:pt-24" id="my-portfolio">
+    <div class="w-full flex flex-col items-center gap-8 md:gap-10" id="portfolio-pin-wrapper">
+    <div class="max-w-7xl mx-auto w-full px-4 sm:px-6">
+      <h2 class="text-4xl sm:text-5xl md:text-6xl font-black font-headline mb-0 md:mb-2 tracking-tight" style="">个人作品</h2>
+    </div>
+    <div class="portfolio-scroll-area w-full relative overflow-hidden" id="portfolio-scroll-area">
+      <div id="portfolio-container" class="portfolio-container flex flex-nowrap gap-6 sm:gap-8 px-4 sm:px-6 pb-8" style="width: max-content;">
 <!-- Project 1 -->
 <div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="1" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
@@ -61,6 +672,15 @@
 <div class="play-button w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 group/play">
 <div class="w-0 h-0 border-l-[20px] border-l-white border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1 group-hover/play:border-l-zinc-900 transition-colors duration-300"></div>
 </div>
+</div><!-- Project 4 -->
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="10" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
+<div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13637090&amp;mid=n2k9QAmRYAjQ18MZ" onclick="startVideo(this)">
+<img src="./images/10-1.png" alt="PREETO 电动自行车短片视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
+<div class="absolute inset-0 flex items-center justify-center" onclick="event.stopPropagation()">
+<div class="play-button w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 group/play">
+<div class="w-0 h-0 border-l-[20px] border-l-white border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1 group-hover/play:border-l-zinc-900 transition-colors duration-300"></div>
+</div>
 </div>
 </div>
 <div class="p-8 space-y-4 flex-grow flex flex-col">
@@ -81,33 +701,6 @@
 </div>
 <!-- Project 4 -->
 <div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="4" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
-<div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
-<div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13637090&amp;mid=n2k9QAmRYAjQ18MZ" onclick="startVideo(this)">
-<img src="./images/10-1.png" alt="PREETO 电动自行车短片视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
-<div class="absolute inset-0 flex items-center justify-center" onclick="event.stopPropagation()">
-<div class="play-button w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 group/play">
-<div class="w-0 h-0 border-l-[20px] border-l-white border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1 group-hover/play:border-l-zinc-900 transition-colors duration-300"></div>
-</div>
-</div>
-</div>
-<div class="p-8 space-y-4 flex-grow flex flex-col">
-<div class="space-y-1">
-<p class="text-zinc-400 text-xs font-medium" style="">产品视频 / 商业广告</p>
-<h3 class="text-xl font-bold text-zinc-900 leading-tight" style="">PREETO 电动自行车短片</h3>
-</div>
-<div class="flex flex-wrap gap-2">
-<span class="px-3 py-1 bg-violet-50 text-violet-600 text-[10px] font-bold rounded-full" style="">后期剪辑</span>
-<span class="px-3 py-1 bg-amber-50 text-amber-700 text-[10px] font-bold rounded-full" style="">产品宣传</span>
-<span class="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-full" style="">音效设计</span>
-</div>
-<p class="text-zinc-500 text-sm leading-relaxed line-clamp-3" style="">
-            针对 PREETO 电动自行车品牌升级，后期通过声音设计与快节奏剪辑增强动能感，精准匹配产品的高性能属性。通过可灵AI进行画面扩展与智能补帧，从而突破素材限制，实现了极度平滑的“无缝转场”的效果。
-          </p>
-</div>
-</div>
-</div>
-<!-- Project 5 -->
-<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="5" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630818&amp;mid=Xl5M7nrz16B7kKEg" onclick="startVideo(this)">
 <img src="./images/7.png" alt="视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -133,7 +726,8 @@
 </div>
 </div>
 </div>
-<!<!-- Project 6 -->div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="6" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<!-- Project 5 -->
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="5" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630814&mid=bKG8Qd3oXnL4RJMy" onclick="startVideo(this)">
 <img src="./images/8.jpg" alt="漫威片场打工日记" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -158,7 +752,8 @@
 </div>
 </div>
 </div>
-<!<!-- Project 7 -->div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="7" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<!-- Project 6 -->
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="6" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630905&amp;mid=DA96QeyElmxQj5N0" onclick="startVideo(this)">
 <img src="./images/6.png" alt="视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -184,7 +779,8 @@
 </div>
 </div>
 </div>
-<!<!-- Project 8 -->div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="8" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<!-- Project 7 -->
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="7" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-gradient-to-br from-indigo-500 to-purple-600 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630826&amp;mid=0vMbw1z68qX4eJ1p" onclick="startVideo(this)">
 <img src="./images/4.png" alt="视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -210,7 +806,8 @@
 </div>
 </div>
 </div>
-<!<!-- Project 9 -->div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="9" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<!-- Project 8 -->
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="8" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630821&amp;mid=9WxJ7lLAWjm781kM" onclick="startVideo(this)">
 <img src="./images/5.png" alt="视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -236,7 +833,8 @@
 </div>
 </div>
 </div>
-<!<!-- Project 10 -->div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="10" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
+<!-- Project 9 -->
+<div class="portfolio-card min-w-[280px] sm:min-w-[320px] md:min-w-[400px] w-[280px] sm:w-[320px] md:w-[400px] flex-shrink-0 group hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl cursor-pointer" data-card-id="9" style="box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);">
 <div class="bg-white rounded-[24px] border border-zinc-100 overflow-hidden flex flex-col h-full">
 <div class="relative h-[220px] bg-zinc-900 p-6 flex flex-col justify-end overflow-hidden video-container" data-video-src="https://player.xinpianchang.com/?aid=13630816&amp;mid=ro1V7E2qRrLwdXAM" onclick="startVideo(this)">
 <img src="./images/9.jpg" alt="《我的第一座雪山》视频缩略图" class="thumbnail-img absolute inset-0 w-full h-full object-cover">
@@ -257,6 +855,24 @@
 </div>
 <p class="text-zinc-500 text-sm leading-relaxed line-clamp-3" style="">
             高海拔徒步纪实。整理了从出发到登顶的零散素材，通过旁白引导剪辑节奏，将破碎场景串联。后期重点在于对高原强光下的高光细节进行色彩还原。
+          </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class="p-8 space-y-4 flex-grow flex flex-col">
+<div class="space-y-1">
+<p class="text-zinc-400 text-xs font-medium" style="">产品视频 / 商业广告</p>
+<h3 class="text-xl font-bold text-zinc-900 leading-tight" style="">PREETO 电动自行车短片</h3>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-violet-50 text-violet-600 text-[10px] font-bold rounded-full" style="">后期剪辑</span>
+<span class="px-3 py-1 bg-amber-50 text-amber-700 text-[10px] font-bold rounded-full" style="">产品宣传</span>
+<span class="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-full" style="">音效设计</span>
+</div>
+<p class="text-zinc-500 text-sm leading-relaxed line-clamp-3" style="">
+            针对 PREETO 电动自行车品牌升级，后期通过声音设计与快节奏剪辑增强动能感，精准匹配产品的高性能属性。
           </p>
 </div>
 </div>
